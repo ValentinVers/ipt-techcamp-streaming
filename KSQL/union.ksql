@@ -1,0 +1,4 @@
+ union (demo_related | project Type="Related", parent_id, timestamp = ['x-opt-enqueued-time']),  (demo_object | project Type="Object",id, timestamp = ['x-opt-enqueued-time'])
+| where timestamp > ago(20m)
+| summarize EventCount = count() by Type, bin(timestamp, 20s);
+
