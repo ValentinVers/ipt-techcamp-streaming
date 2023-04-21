@@ -2,10 +2,8 @@ package ch.ipt.kafka.config;
 
 import com.azure.core.credential.TokenCredential;
 import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroDeserializer;
 import com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroSerializerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -53,20 +51,5 @@ public class KafkaDefault {
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
-//    @Bean
-//    public ConsumerFactory<String, Object> consumerFactoryStringObject() {
-//        Map<String, Object> props = properties.getConsumer().buildProperties();
-//        addTokeCreds(props);
-//        return new DefaultKafkaConsumerFactory<>(props);
-//    }
-
-//    @Bean
-//    public ConsumerFactory<String, String> consumerFactoryStringString() {
-//        Map<String, Object> props = properties.getConsumer().buildProperties();
-//        addTokeCreds(props);
-//        return new DefaultKafkaConsumerFactory<>(props,
-//                new StringDeserializer(),
-//                new StringDeserializer());
-//    }
 
 }
