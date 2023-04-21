@@ -90,51 +90,54 @@ namespace KafkaProducer
 
             Random rnd = new Random();
 
-            for (int x = 0; x < 1000; x++)
-            {
-                Thread.Sleep(rnd.Next(500, 10000));
-
-                DemoObject obj = new DemoObject
+            Parallel.For(0, 1000, async i => {
                 {
-                    id = Guid.NewGuid().ToString(),
-                    count = rnd.Next(0, 20),
-                    date = DateTime.Now,
-                    content = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.FFF")
-                };
+                    Thread.Sleep(rnd.Next(500, 1000));
 
-                var msg = new Message<string, string>
-                {
-                    Key = obj.id,
-                    Value = JsonSerializer.Serialize(obj)
-                };
-
-                // publishes the message to Event Hubs
-                var resultPromise =  producer.ProduceAsync(topicName, msg);
-
-                for (int y = 0; y < obj.count; y++)
-                {
-                    var related = new DemoRelated
+                    DemoObject obj = new DemoObject
                     {
-                        parent_id = obj.id,
-                        index = y,
-                        value = rnd.Next()
-                    };
-                    var msg2 = new Message<string, string>
-                    {
-                        Key = related.parent_id,
-                        Value = JsonSerializer.Serialize(related),
-
+                        id = Guid.NewGuid().ToString(),
+                        count = rnd.Next(0, 20),
+                        date = DateTime.Now,
+                        content = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.FFF")
                     };
 
-                    producer.ProduceAsync("demo-related", msg2);
+                    var msg = new Message<string, string>
+                    {
+                        Key = obj.id,
+                        Value = JsonSerializer.Serialize(obj)
+                    };
+
+                    // publishes the message to Event Hubs
+                    var resultPromise = producer.ProduceAsync(topicName, msg);
+
+                    for (int y = 0; y < obj.count; y++)
+                    {
+                        Thread.Sleep(rnd.Next(0, 500));
+                        var related = new DemoRelated
+                        {
+                            parent_id = obj.id,
+                            index = y,
+                            value = rnd.Next()
+                        };
+                        var msg2 = new Message<string, string>
+                        {
+                            Key = related.parent_id,
+                            Value = JsonSerializer.Serialize(related),
+
+                        };
+
+                        producer.ProduceAsync("demo-related", msg2);
+                    }
+
+
+                    var result = await resultPromise;
+                    Console.WriteLine($"Message {result.Value} sent to partition {result.TopicPartition} with result {result.Status}");
                 }
 
-
-                var result = await resultPromise;
-                Console.WriteLine($"Message {result.Value} sent to partition {result.TopicPartition} with result {result.Status}");
-            }
-
-            Console.WriteLine("Producer complete");
+                Console.WriteLine("Producer complete");
+            });
+            
         }
 
     }

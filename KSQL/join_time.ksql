@@ -1,0 +1,22 @@
+let lookupWindow = 2s;
+let lookupBin = lookupWindow / 2.0; // lookup bin = equal to 1/2 of the lookup window
+
+demo_object
+| where ['x-opt-enqueued-time'] > ago(1m)
+| project id, Timestamp = ['x-opt-enqueued-time'],
+          // TimeKey on the left side of the join is mapped to a discrete time axis for the join purpose
+          TimeKey = bin(['x-opt-enqueued-time'], lookupBin)
+| join kind=inner  
+    (
+    demo_related
+    | project parent_id, value, RelatedTimestamp=['x-opt-enqueued-time'],
+        // TimeKey on the right side of the join - emulates event 'B' appearing several times
+        // as if it was 'replicated'
+        TimeKey = range(bin(['x-opt-enqueued-time']-lookupWindow, lookupBin),
+                        bin(['x-opt-enqueued-time'], lookupBin),
+                        lookupBin)
+    // 'mv-expand' translates the TimeKey array range into a column
+    | mv-expand TimeKey to typeof(datetime)
+    ) on $left.id == $right.parent_id, TimeKey
+| project id, value, Timestamp, RelatedTimestamp, TimeKey
+| summarize Average=avg(value), Count=count(), FirstEvent=min(RelatedTimestamp), LastEvent=max(RelatedTimestamp) by id

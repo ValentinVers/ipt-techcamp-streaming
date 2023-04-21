@@ -1,0 +1,4 @@
+let Events = demo_table;
+let Related = demo_related;
+Events
+| join kind=leftouter Related on $left.id == $right.parent_id
