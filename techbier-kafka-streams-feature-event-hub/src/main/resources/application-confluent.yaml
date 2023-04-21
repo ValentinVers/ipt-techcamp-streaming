@@ -1,0 +1,29 @@
+# Kafka Config
+KAFKA_KEY: secret
+KAFKA_SECRET: secret
+
+# Schema Registry Config
+SR_API_KEY: secret
+SR_API_SECRET: secret
+
+INITIALS: ${USER}
+
+spring:
+  kafka:
+    bootstrap-servers: pkc-lzoyy.europe-west6.gcp.confluent.cloud:9092
+
+    properties:
+      security.protocol: SASL_SSL
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='${KAFKA_KEY}'   password='${KAFKA_SECRET}';
+      sasl.mechanism: PLAIN
+
+      client.dns.lookup: use_all_dns_ips
+      session.timeout.ms: 45000
+
+      # Required connection configs for Confluent Cloud Schema Registry
+      schema.registry.url: https://psrc-l7opw.europe-west3.gcp.confluent.cloud
+      basic.auth.credentials.source: USER_INFO
+      basic.auth.user.info: ${SR_API_KEY}:${SR_API_SECRET}
+
+
+

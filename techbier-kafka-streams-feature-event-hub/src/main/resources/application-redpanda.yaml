@@ -1,0 +1,12 @@
+# Kafka Config
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    properties:
+      schema.registry.url: http://localhost:8888
+      enable.idempotence: false
+
+
+INITIALS: USER-redpanda
+topic-replicas: 1

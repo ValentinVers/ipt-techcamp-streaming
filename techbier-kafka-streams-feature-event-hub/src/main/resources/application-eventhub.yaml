@@ -1,0 +1,45 @@
+# Schema Registry Config
+INITIALS: csu
+SASL_CONFIG: tbd
+
+spring:
+  kafka:
+    consumer:
+      value-deserializer: com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroDeserializer
+      properties:
+        bootstrap.servers: "techcamp.servicebus.windows.net:9093"
+        security.protocol: "SASL_SSL"
+        sasl.mechanism: "PLAIN"
+        sasl.jaas.config: ${SASL_CONFIG}
+        client.dns.lookup: "use_all_dns_ips"
+        acks: "all"
+        schema.registry.url: "https://techcamp.servicebus.windows.net"
+        schema.group: "techcamp"
+    producer:
+      value-serializer: com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroSerializer
+      properties:
+        bootstrap.servers: "techcamp.servicebus.windows.net:9093"
+        security.protocol: "SASL_SSL"
+        sasl.mechanism: "PLAIN"
+        sasl.jaas.config: ${SASL_CONFIG}
+        client.dns.lookup: "use_all_dns_ips"
+        acks: "all"
+        schema.registry.url: "https://techcamp.servicebus.windows.net"
+        schema.group: "techcamp"
+#    streams:
+#      properties:
+#        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+    bootstrap-servers: techcamp.servicebus.windows.net:9093
+    properties:
+      sasl.jaas.config: ${SASL_CONFIG}
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+
+      client.dns.lookup: use_all_dns_ips
+      session.timeout.ms: 45000
+
+      # Required connection configs for Confluent Cloud Schema Registry
+      schema.registry.url: https://techcamp.servicebus.windows.net
+
+
+

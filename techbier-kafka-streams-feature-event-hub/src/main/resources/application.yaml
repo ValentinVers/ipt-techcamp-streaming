@@ -1,0 +1,26 @@
+spring:
+  kafka:
+
+    streams:
+      application-id: techbier-2023-${INITIALS}
+      state-dir: ${user.dir}/target/state
+
+      properties:
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+
+    producer:
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+
+    consumer:
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      properties:
+#        specific.avro.reader: true
+
+source-topic-transactions: transactions
+source-topic-accounts: accounts
+topic-replicas: 3
+
