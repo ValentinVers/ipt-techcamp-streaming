@@ -15,6 +15,7 @@ spring:
         acks: "all"
         schema.registry.url: "https://techcamp.servicebus.windows.net"
         schema.group: "techcamp"
+        enable.idempotence: false
     producer:
       value-serializer: com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroSerializer
       properties:
@@ -26,6 +27,7 @@ spring:
         acks: "all"
         schema.registry.url: "https://techcamp.servicebus.windows.net"
         schema.group: "techcamp"
+        enable.idempotence: false
     streams:
       properties:
         default.value.serde: ch.ipt.kafka.config.SpecificAvroSerde
@@ -37,6 +39,8 @@ spring:
         acks: "all"
         schema.registry.url: "https://techcamp.servicebus.windows.net"
         schema.group: "techcamp"
+        topic.retention.ms: "86400000"
+        enable.idempotence: false
     bootstrap-servers: techcamp.servicebus.windows.net:9093
     properties:
       sasl.jaas.config: ${SASL_CONFIG}

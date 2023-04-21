@@ -47,14 +47,14 @@ public class KafkaStreamsDefaultTopology {
     private String transactionTopic;
 
 
-    @Bean
+//    @Bean
     KStream<String, Payment> buildPipeline(StreamsBuilder streamsBuilder) {
 
         //default topology which peeks at every transaction
 
         KStream<String, Payment> messageStream = streamsBuilder.stream(sourceTopic);
 
-        messageStream.peek((key, payment) -> LOGGER.info("Message: key={}, value={}", key, payment));
+        messageStream.peek((key, payment) -> LOGGER.trace("Message: key={}, value={}", key, payment));
 
         LOGGER.info(String.valueOf(streamsBuilder.build().describe()));
 
@@ -123,7 +123,7 @@ public class KafkaStreamsDefaultTopology {
 
     private NewTopic createTopic(String topicName) {
         return TopicBuilder.name(topicName)
-                .partitions(6)
+                .partitions(3)
                 .replicas(replicas)
                 .build();
     }

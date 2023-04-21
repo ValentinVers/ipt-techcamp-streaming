@@ -22,5 +22,5 @@ spring:
 
 source-topic-transactions: transactions
 source-topic-accounts: accounts
-topic-replicas: 3
+topic-replicas: 2
 
