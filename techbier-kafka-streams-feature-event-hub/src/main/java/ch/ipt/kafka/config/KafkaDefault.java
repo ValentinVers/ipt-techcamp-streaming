@@ -22,32 +22,31 @@ import java.util.Map;
 public class KafkaDefault {
 
     private final KafkaProperties properties;
-    private final TokenCredential tokenCredential;
+    private static final TokenCredential TOKEN_CREDENTIALS = new DefaultAzureCredentialBuilder().build();
 
     public KafkaDefault(KafkaProperties properties) {
         this.properties = properties;
-        tokenCredential = new DefaultAzureCredentialBuilder().build();
     }
 
 
     @Bean
     public KafkaProducer<String, Object> kafkaProducer() {
         Map<String, Object> props = properties.getProducer().buildProperties();
-        addTokeCreds(props);
+        addTokenCreds(props);
         return new KafkaProducer<String, Object>(props);
     }
 
 
-    private void addTokeCreds(Map<String, Object> props) {
+    public static void addTokenCreds(Map<String, Object> props) {
         props.put("specific.avro.reader", true);
         props.put(KafkaAvroSerializerConfig.AUTO_REGISTER_SCHEMAS_CONFIG, true);
-        props.put("schema.registry.credential", tokenCredential);
+        props.put("schema.registry.credential", TOKEN_CREDENTIALS);
     }
 
     @Bean
     public ConsumerFactory<Object, Object> consumerFactoryObjectObject() {
         Map<String, Object> props = properties.getConsumer().buildProperties();
-        addTokeCreds(props);
+        addTokenCreds(props);
         return new DefaultKafkaConsumerFactory<>(props);
     }
 

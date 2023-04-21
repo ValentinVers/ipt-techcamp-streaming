@@ -26,9 +26,17 @@ spring:
         acks: "all"
         schema.registry.url: "https://techcamp.servicebus.windows.net"
         schema.group: "techcamp"
-#    streams:
-#      properties:
-#        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+    streams:
+      properties:
+        default.value.serde: ch.ipt.kafka.config.SpecificAvroSerde
+        bootstrap.servers: "techcamp.servicebus.windows.net:9093"
+        security.protocol: "SASL_SSL"
+        sasl.mechanism: "PLAIN"
+        sasl.jaas.config: ${SASL_CONFIG}
+        client.dns.lookup: "use_all_dns_ips"
+        acks: "all"
+        schema.registry.url: "https://techcamp.servicebus.windows.net"
+        schema.group: "techcamp"
     bootstrap-servers: techcamp.servicebus.windows.net:9093
     properties:
       sasl.jaas.config: ${SASL_CONFIG}

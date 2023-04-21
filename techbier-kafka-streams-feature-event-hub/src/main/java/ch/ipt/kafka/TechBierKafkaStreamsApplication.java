@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-//@EnableKafkaStreams
+@EnableKafkaStreams
 public class TechBierKafkaStreamsApplication {
 
     public static void main(String[] args) {
