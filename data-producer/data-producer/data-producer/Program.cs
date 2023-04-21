@@ -4,9 +4,27 @@ using Azure.Core;
 using System;
 using Azure.Identity;
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace KafkaProducer
 {
+
+    public class DemoObject
+    {
+        public string id { get; set; }
+        public int count { get; set; }
+        public DateTime date { get; set; }
+        public string content { get; set; }
+    }
+
+    class DemoRelated
+    {
+        public string parent_id { get; set; }
+        public int index { get; set; }
+        public int value { get; set; }
+    }
 
     public class Program
     {
@@ -16,7 +34,7 @@ namespace KafkaProducer
         private static string eventHubNamespaceFQDNwithPort = $"{eventHubNamespace}.servicebus.windows.net:9093";
 
         //in kafka world this is the topic in event hub is the event hub name under the namespace
-        private static string topicName = "test";
+        private static string topicName = "demo";
 
         static void OauthCallback(IClient client, string cfg)
         {
@@ -64,20 +82,58 @@ namespace KafkaProducer
                 SaslPassword = Environment.GetEnvironmentVariable("CONNECTIONSTRING")
             };
 
-            var producerBuilder = new ProducerBuilder<Null, string>(configKey);
+            var producerBuilder = new ProducerBuilder<string, string>(configKey);
 
             //IProducer<Null, string> producer = producerBuilder.SetOAuthBearerTokenRefreshHandler(OauthCallback).Build();
-            IProducer<Null, string> producer = producerBuilder.Build();
+            IProducer<string, string> producer = producerBuilder.Build();
 
-            for (int x = 0; x < 10; x++)
+
+            Random rnd = new Random();
+
+            for (int x = 0; x < 1000; x++)
             {
-                var msg = new Message<Null, string> { Value = string.Format("This is a sample message - msg # {0} at {1}", x, DateTime.Now.ToString("yyyMMdd_HHmmSSfff")) };
+                Thread.Sleep(rnd.Next(500, 10000));
+
+                DemoObject obj = new DemoObject
+                {
+                    id = Guid.NewGuid().ToString(),
+                    count = rnd.Next(0, 20),
+                    date = DateTime.Now,
+                    content = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss.FFF")
+                };
+
+                var msg = new Message<string, string>
+                {
+                    Key = obj.id,
+                    Value = JsonSerializer.Serialize(obj)
+                };
 
                 // publishes the message to Event Hubs
-                var result = await producer.ProduceAsync(topicName, msg);
+                var resultPromise =  producer.ProduceAsync(topicName, msg);
 
+                for (int y = 0; y < obj.count; y++)
+                {
+                    var related = new DemoRelated
+                    {
+                        parent_id = obj.id,
+                        index = y,
+                        value = rnd.Next()
+                    };
+                    var msg2 = new Message<string, string>
+                    {
+                        Key = related.parent_id,
+                        Value = JsonSerializer.Serialize(related),
+
+                    };
+
+                    producer.ProduceAsync("demo-related", msg2);
+                }
+
+
+                var result = await resultPromise;
                 Console.WriteLine($"Message {result.Value} sent to partition {result.TopicPartition} with result {result.Status}");
             }
+
             Console.WriteLine("Producer complete");
         }
 

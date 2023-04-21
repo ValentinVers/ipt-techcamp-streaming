@@ -7,16 +7,16 @@
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.Workbench ActiveDocument="data-producer/Program.cs">
     <Files>
-      <File FileName="data-producer/Class1.cs" Line="8" Column="27" />
-      <File FileName=".gitignore" Line="1" Column="1" />
-      <File FileName=".gitignore" Line="334" Column="14" />
-      <File FileName="data-producer/data-producer.csproj" Line="1" Column="1" />
+      <File FileName="data-producer/Program.cs" Line="70" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="data-producer" expanded="True">
-            <Node name="data-producer" selected="True" />
+            <Node name="Solution Items" expanded="True" />
+            <Node name="data-producer" expanded="True" selected="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
