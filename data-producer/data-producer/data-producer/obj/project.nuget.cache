@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "KvqBVU1FiB2WSK4EspJfet84YFxnpErffiucJRXb9s6AdHssRC2Zo2n+oHD9QjfLNg4ovgQZ/42n1hq3FciTCA==",
+  "success": true,
+  "projectFilePath": "/Users/andrilareida/Documents/code/ipt-techcamp-streaming/data-producer/data-producer/data-producer/data-producer.csproj",
+  "expectedPackageFiles": [
+    "/Users/andrilareida/.nuget/packages/azure.core/1.31.0/azure.core.1.31.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/azure.identity/1.8.2/azure.identity.1.8.2.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/confluent.kafka/2.1.0/confluent.kafka.2.1.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/librdkafka.redist/2.1.0/librdkafka.redist.2.1.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/microsoft.identity.client/4.49.1/microsoft.identity.client.4.49.1.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/microsoft.identity.client.extensions.msal/2.25.3/microsoft.identity.client.extensions.msal.2.25.3.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/microsoft.identitymodel.abstractions/6.22.0/microsoft.identitymodel.abstractions.6.22.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.diagnostics.diagnosticsource/4.6.0/system.diagnostics.diagnosticsource.4.6.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.io.filesystem.accesscontrol/5.0.0/system.io.filesystem.accesscontrol.5.0.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.security.accesscontrol/5.0.0/system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.security.cryptography.protecteddata/4.7.0/system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.security.principal.windows/5.0.0/system.security.principal.windows.5.0.0.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.text.encodings.web/4.7.2/system.text.encodings.web.4.7.2.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
+    "/Users/andrilareida/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}
