@@ -47,21 +47,26 @@ public class KafkaDefault {
     }
 
     @Bean
-    public ConsumerFactory<Object, Object> consumerFactory() {
+    public ConsumerFactory<Object, Object> consumerFactoryObjectObject() {
         Map<String, Object> props = properties.getConsumer().buildProperties();
         addTokeCreds(props);
-        return new DefaultKafkaConsumerFactory<>(props,
-                new KafkaAvroDeserializer(),
-                new KafkaAvroDeserializer());
+        return new DefaultKafkaConsumerFactory<>(props);
     }
 
-    @Bean
-    public ConsumerFactory<String, Object> consumerFactoryString() {
-        Map<String, Object> props = properties.getConsumer().buildProperties();
-        addTokeCreds(props);
-        return new DefaultKafkaConsumerFactory<>(props,
-                new StringDeserializer(),
-                new KafkaAvroDeserializer());
-    }
+//    @Bean
+//    public ConsumerFactory<String, Object> consumerFactoryStringObject() {
+//        Map<String, Object> props = properties.getConsumer().buildProperties();
+//        addTokeCreds(props);
+//        return new DefaultKafkaConsumerFactory<>(props);
+//    }
+
+//    @Bean
+//    public ConsumerFactory<String, String> consumerFactoryStringString() {
+//        Map<String, Object> props = properties.getConsumer().buildProperties();
+//        addTokeCreds(props);
+//        return new DefaultKafkaConsumerFactory<>(props,
+//                new StringDeserializer(),
+//                new StringDeserializer());
+//    }
 
 }

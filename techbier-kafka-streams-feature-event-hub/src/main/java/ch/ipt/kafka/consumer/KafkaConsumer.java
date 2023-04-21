@@ -31,4 +31,5 @@ public class KafkaConsumer {
         Account value = consumerRecord.value();
         LOGGER.info("received account message: key={}, value={}", key, value);
     }
+
 }
