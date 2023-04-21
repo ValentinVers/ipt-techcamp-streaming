@@ -55,9 +55,19 @@ namespace KafkaProducer
                 Debug = "security,broker,protocol"
             };
 
-            var producerBuilder = new ProducerBuilder<Null, string>(config);
+            var configKey = new ProducerConfig
+            {
+                BootstrapServers = eventHubNamespaceFQDNwithPort,
+                SecurityProtocol = SecurityProtocol.SaslSsl,
+                SaslMechanism = SaslMechanism.Plain,
+                SaslUsername = "$ConnectionString",
+                SaslPassword = Environment.GetEnvironmentVariable("CONNECTIONSTRING")
+            };
 
-            IProducer<Null, string> producer = producerBuilder.SetOAuthBearerTokenRefreshHandler(OauthCallback).Build();
+            var producerBuilder = new ProducerBuilder<Null, string>(configKey);
+
+            //IProducer<Null, string> producer = producerBuilder.SetOAuthBearerTokenRefreshHandler(OauthCallback).Build();
+            IProducer<Null, string> producer = producerBuilder.Build();
 
             for (int x = 0; x < 10; x++)
             {
