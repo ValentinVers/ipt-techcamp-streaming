@@ -123,7 +123,7 @@ public class KafkaStreamsDefaultTopology {
 
     private NewTopic createTopic(String topicName) {
         return TopicBuilder.name(topicName)
-                .partitions(3)
+                .partitions(2)
                 .replicas(replicas)
                 .build();
     }
