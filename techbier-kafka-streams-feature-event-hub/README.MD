@@ -1,3 +1,21 @@
+# Deployment
+## Setup
+- Container Registry with Admin enabled
+- Container App
+
+## Build and Push
+docker image build -t docker-java-jar:latest . ; docker run docker-java-jar:latest
+docker tag docker-java-jar:latest techcampstreaming.azurecr.io/docker-java-jar
+### Get Credentials for registry
+Get credentials from admin user on Azure Portal -> Container Registry -> Access Keys
+
+docker login 
+
+docker push techcampstreaming.azurecr.io/docker-java-jar
+
+## Cross Platform build with Mac M1
+docker buildx build --platform linux/amd64 --push -t techcampstreaming.azurecr.io/docker-java-amd64 .
+
 # Umgebung konfigurieren
 
 Diese App produziert, konsumiert und verarbeitet Kafka Events. 

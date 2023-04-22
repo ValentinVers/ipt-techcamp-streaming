@@ -3,6 +3,9 @@ INITIALS: csu
 SASL_CONFIG: tbd
 
 spring:
+  cloud.azure:
+    credential:
+      managed-identity-enabled: true
   kafka:
     consumer:
       value-deserializer: com.microsoft.azure.schemaregistry.kafka.avro.KafkaAvroDeserializer
