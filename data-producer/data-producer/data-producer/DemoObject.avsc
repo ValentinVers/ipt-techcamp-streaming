@@ -1,0 +1,24 @@
+﻿{
+"namespace": "MessageTypes",
+"type": "record",
+"doc": "A simple message type.",
+"name": "Demo",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "count",
+      "type": "int"
+    },
+    {
+      "name": "date",
+      "type": "string"
+    },
+    {
+      "name": "content",
+      "type": "string"
+    }
+  ]
+}

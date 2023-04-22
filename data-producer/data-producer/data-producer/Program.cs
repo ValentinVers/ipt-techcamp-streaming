@@ -90,7 +90,7 @@ namespace KafkaProducer
 
             Random rnd = new Random();
 
-            Parallel.For(0, 10000, async i => {
+            Parallel.For(0, 100000, async i => {
                 {
                     Thread.Sleep(rnd.Next(500, 1000));
 
@@ -118,7 +118,7 @@ namespace KafkaProducer
                         {
                             parent_id = obj.id,
                             index = y,
-                            value = rnd.Next()
+                            value = rnd.Next(0,100)
                         };
                         var msg2 = new Message<string, string>
                         {

@@ -1,0 +1,26 @@
+{
+    "Name": "DataLakeStorageGen2BlobStorage1",
+    "DataSourceType": "Blob Storage",
+    "BlobStorageProperties": {
+        "StorageAccounts": [
+            {
+                "AccountName": "satechcampstreamingdl01",
+                "AccountKey": "********"
+            }
+        ],
+        "Container": "streamanalytricsjobs",
+        "PathPattern": "blah",
+        "DateFormat": "yyyy/MM/dd",
+        "TimeFormat": "HH",
+        "AuthenticationMode": "ConnectionString"
+    },
+    "DataSourceCredentialDomain": "05d5ad54-6ece-4373-b4b7-afb4ed0c6f3e.StreamAnalystics",
+    "Serialization": {
+        "Type": "Json",
+        "Encoding": "UTF8",
+        "Format": "LineSeparated"
+    },
+    "MinimumRows": null,
+    "MaximumTime": null,
+    "ScriptType": "Output"
+}
